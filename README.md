@@ -253,7 +253,6 @@ These maps reset when the Node.js server restarts. Durable membership and histor
 | Server → sender | `messageSent` | `{ id }` | Matches the optimistic local message to its DB ID. |
 | Client/server | `typing`, `stopTyping`, `typingUpdate` | username/room or username list | Drives typing indicator. |
 | Client/server | `deleteMessage`, `messageDeleted` | message ID/room | Soft-deletes the DB record and updates connected clients. |
-| Client/server | `addReaction`, `removeReaction`, updates | message ID, user, emoji, room | Persists/revokes a user’s reaction and broadcasts update. |
 | Client/server | `markSeen`, `seenUpdated` | message ID, user, room | Stores a read receipt and notifies the room. |
 | Client → server | `leaveRoom`, `signOut` | none | Leave removes durable membership; sign-out only marks live presence inactive. |
 | Server → room | `notification` | text | Adds join, leave, and admin-change timeline notifications. |
