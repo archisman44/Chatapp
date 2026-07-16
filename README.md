@@ -172,7 +172,6 @@ messages (1) ───────< message_seen      (many)
 | `user_rooms` | `id`, `username`, `room`, `joined_at` | Durable room membership. `UNIQUE(username, room)` prevents duplicate memberships and preserves the first join time. |
 | `messages` | `id`, `username`, `room`, `message`, `type`, `deleted`, `created_at` | Chat ciphertext or system notification. `deleted` implements soft deletion. |
 | `room_invites` | `id`, `from_username`, `to_username`, `room`, `status`, `created_at` | Invitation inbox and its pending/accepted/declined state. The unique key prevents duplicate invite state for one recipient/room/status. |
-| `message_reactions` | `id`, `message_id`, `username`, `emoji` | One emoji reaction per user per message; a later reaction replaces their previous emoji. `message_id` cascades on actual message deletion. |
 | `message_seen` | `id`, `message_id`, `username`, `seen_at` | Idempotent read receipt. One user can mark a message seen once. |
 
 ### Important schema excerpts
