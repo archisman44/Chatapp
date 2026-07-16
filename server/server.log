@@ -1,0 +1,10 @@
+
+> server@1.0.0 start
+> node index.js
+
+◇ injected env (7) from .env // tip: ⌘ enable debugging { debug: true }
+◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+Server running on port 5000
+MySQL connected
+
+c:\CHATAPP\CHATAPP\CHATAPP\server>
