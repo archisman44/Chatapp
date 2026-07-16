@@ -76,8 +76,6 @@ ChatApp combines REST APIs for persistent data with Socket.IO for low-latency ro
 - The server persists and broadcasts ciphertext rather than message plaintext.
 - Messages are decrypted only in participating browsers; a failed decryption displays a safe placeholder.
 
-> Important: this is browser-side encryption, but the room name is the only shared key material and the salt is fixed. It is useful for this project demonstration, but it is not a production-grade end-to-end encryption design. See [Security and production considerations](#12-security-and-production-considerations).
-
 ## 3. Project structure
 
 ```text
