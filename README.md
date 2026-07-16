@@ -484,32 +484,7 @@ Open `http://localhost:3000`. Register two accounts and use separate browser pro
 | `client` | `npm run build` | Creates a production client build. |
 | `client` | `npm test` | Runs Create React App tests. |
 
-## 11. Demonstration checklist
 
-For a project presentation, this sequence shows the major architecture clearly:
-
-1. Register two accounts and log in as the first user.
-2. Create a room; explain that the first active member becomes the admin.
-3. Open the same room with a second account; show the waiting state and the admin’s approval request.
-4. Approve the request and show the live member list/presence update.
-5. Send messages from both browser windows; explain the client encryption → socket → database → recipient decryption path.
-6. Show typing indicator, read receipt information, and a soft-deleted message.
-7. Invite another registered account; accept the invitation and show direct access to the room.
-8. Refresh a browser to show saved room/session recovery.
-9. Explain MySQL persistence versus in-memory state: messages and memberships survive a server restart; live presence, pending requests, and current admins do not.
-
-## 12. Security and production considerations
-
-The code is a strong educational prototype, but the following changes are needed before production deployment:
-
-- **Authentication authorization:** Login returns identity but no signed session/JWT exists. REST endpoints and many socket events trust client-supplied usernames/room/message IDs. Add authenticated middleware and socket handshake verification; enforce server-side ownership/admin checks for delete, reactions, room operations, and invitation authority.
-- **Encryption design:** A room-name-derived key is guessable for predictable room names. Use a random per-room key, authenticated key distribution, key rotation, member removal/rekeying, and a reviewed protocol such as Signal-style group encryption for real E2EE.
-- **Password reset:** Never return reset tokens in a public response. Persist a hashed token, send a single-use link via email, throttle requests, and use a short expiry.
-- **Transport/deployment:** Use HTTPS/WSS, environment-specific CORS origins, rate limits, input validation, secure headers, logging, and monitoring.
-- **Scalability:** Socket presence maps are process-local. Use a Socket.IO adapter (for example Redis) and shared room/admin/request state when scaling to multiple server processes.
-- **Data performance:** The history controller executes reaction and seen queries once per message. Batch queries or use joins for larger histories; add indexes for frequent `(room, created_at)` queries.
-- **Message search:** Server-side SQL `LIKE` cannot search encrypted plaintext. Keep search local after decryption or use a deliberately designed encrypted-search approach with its security trade-offs.
-- **Feature completion note:** Socket handlers and database support reactions, but the current `ChatWindow` does not render reaction controls/badges. The feature needs UI wiring to be user-visible.
 
 ## Author
 
